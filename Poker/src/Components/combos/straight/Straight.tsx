@@ -25,18 +25,13 @@ export const StraightFlush = () => {
     secondP: ICards,
     tableCards: ICards[]
   ) => {
-    const firstMatch = tableCards.some((card) => card.number === firstP.number);
-    const secondMatch = tableCards.some((card) => card.number === secondP.number);
-    
-    if (firstMatch && secondMatch) {
-      console.log("YOU HAVE TWO PAIR");
-    } else if (firstMatch) {
-      console.log("YOU HAVE A PAIR WITH FIRST CARD");
-    } else if (secondMatch) {
-      console.log("YOU HAVE A PAIR WITH SECOND CARD");
-    } else {
-      console.log("NO PAIR");
-    }
+      for (let i = 0; i < tableCards.length; i++) {
+        if (firstP.number && 
+          secondP.number &&
+          tableCards[i].number === 20 || 25 || 30 || 35 || 40 ) {
+             console.log("YOU HAVE STRAIGHT")
+        }
+      }
   };
   getStraightFlush( PlayerFirstCard, PlayerSecondCard, tableCard);
 };

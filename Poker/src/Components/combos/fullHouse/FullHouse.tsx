@@ -1,4 +1,3 @@
-
 import { ICards } from "../../../stateTypes";
 import { getRandomCard } from "../../gameCards/getRandomCard/getRandomCard";
 export const StraightFlush = () => {
@@ -25,18 +24,13 @@ export const StraightFlush = () => {
     secondP: ICards,
     tableCards: ICards[]
   ) => {
-    const firstMatch = tableCards.some((card) => card.number === firstP.number);
-    const secondMatch = tableCards.some((card) => card.number === secondP.number);
-    
-    if (firstMatch && secondMatch) {
-      console.log("YOU HAVE TWO PAIR");
-    } else if (firstMatch) {
-      console.log("YOU HAVE A PAIR WITH FIRST CARD");
-    } else if (secondMatch) {
-      console.log("YOU HAVE A PAIR WITH SECOND CARD");
-    } else {
-      console.log("NO PAIR");
-    }
-  };
-  getStraightFlush( PlayerFirstCard, PlayerSecondCard, tableCard);
-};
+    for (let i = 0; i < tableCards.length; i++) {
+        if(firstP.number || secondP.number > FirstC.number || SecondC.number){
+            console.log("HIGH CARD OF PLAYER WON")
+        }if(firstP.number || secondP.number < FirstC.number || SecondC.number){
+            console.log("HIGH CARD OF COMPUTER WON")    
+        }
+      }
+}
+ getStraightFlush(PlayerFirstCard, PlayerSecondCard, tableCard);
+}

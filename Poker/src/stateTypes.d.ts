@@ -6,17 +6,13 @@ export interface ICards {
    export interface IPlayer {
     name: string;
     hand: ICards;
-    chips :IChip[]
+    chips :string[]
   }
    export interface IChip {
     denomination: number;
     color: string
     quantity: number;
   }
- export interface Iopponents{
-    playerOne: [ICards,IPlayer],
-    Computer:[ICards,IPlayer],
- }
   export interface IAction {
     type: 'bet' | 'check' | 'fold' | 'raise';
     amount?: number;

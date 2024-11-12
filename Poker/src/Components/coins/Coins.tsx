@@ -2,12 +2,15 @@ import { IChip } from "../../stateTypes";
 import styles from "GameCards.module.scss";
 
 export const Coins = () => {
-  const white: number[] = [];
-  const red: number[] = [];
-  const blue: number[] = [];
-  const green: number[] = [];
-  const dark: number[] = [];
+  
+  const white: string[] = [];
+  const red: string[] = [];
+  const blue: string[] = [];
+  const green: string[] = [];
+  const dark: string[] = [];
   const coins: IChip[] = [];
+
+
   const addCoins = (denomination: number, color: string) => {
     for (let i = 0; i < 50; i++) {
       coins.push({
@@ -20,15 +23,15 @@ export const Coins = () => {
     for (let i = 0; i < coins.length; i++) {
       const coin = coins[i];
       if (coin.denomination === 1) {
-        white.push(coin.denomination);
+        white.push(coin.color);
       } else if (coin.denomination === 5) {
-        red.push(coin.denomination);
+        red.push(coin.color);
       } else if (coin.denomination === 10) {
-        blue.push(coin.denomination);
+        blue.push(coin.color);
       } else if (coin.denomination === 25) {
-        green.push(coin.denomination);
+        green.push(coin.color);
       } else if (coin.denomination === 100) {
-        dark.push(coin.denomination);
+        dark.push(coin.color);
       }
     }
   };
@@ -38,16 +41,11 @@ export const Coins = () => {
   addCoins(25, "green_25.png");
   addCoins(100, "black_100.png");
 
-  const allCoins ={ 
+  return {
     white,
     red,
     blue,
     green,
     dark,
-    coins
-
-  }
-  return {
-  allCoins
   };
 };
