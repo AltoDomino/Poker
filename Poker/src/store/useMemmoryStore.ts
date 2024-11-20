@@ -1,33 +1,37 @@
 import { create } from 'zustand'
-import { initialState, IPokerStore} from '../stateTypes'
+import { ICards, InitialState} from '../stateTypes'
 import { devtools } from 'zustand/middleware'
 
 
-export const useStore :initialState = {
-    revealedCard : 0,
-    gameTime:"00:00",
-    startPlayerTime: false,
-    stopPlayerTime: false,
+export const useStore :InitialState = {
+    playerTime: true,
+    computerTime: false,
     cardsOnTable: 0,
-    cardOnHand: 0,
-    wonDeck: false
+    wonDeck: true,
+    playerCards: [],
+    computerCards: [],
+    communityCards: [], 
 }
 
 export const useStats = create(
     devtools((set) =>{
         return{
-            round: useStore.revealedCard,
-            gameTime: useStore.gameTime,
-            startPlayerTime: useStore.startPlayerTime,
-            stopPlayerTime: useStore.startPlayerTime,
+            communityCards:useStore.communityCards,
+            computerTime:useStore.computerTime,
+            playerTime: useStore.playerTime,
             cardsOnTable: useStore.cardsOnTable,
-            cardsOnHand: useStore.cardOnHand,
             wonDeck: useStore.wonDeck,
-            resetStats: () =>({...useStore,stopTime:true,startTime: false}),
             resetGame: () => set(useStore),
-            changeStop:(stop:boolean) => set(()=>(stop)),
-            changeStart:(start:boolean) => set(()=>(start)),
-            changeTime:(time:string) => set(()=>(time))
+            resetCards:() => set({wonDeck:false}),
+            changePlayer:() => set({playerTime: false,computerTime:true}),
+            changeComputer:() => set({playerTime: true,computerTime: false}),
+            changeTime:(time:number) => set(()=>(time)),
+            addCommunityCard: (card: ICards) => card,
+            setCurrentBet: (amount: number) =>amount,
+            setPlayerCards: (cards: ICards[]) => set(
+                { playerCard: cards }),
+            setComputerCards: (cards: ICards[]) => set(
+                { computerCards: cards})
         }
     })
 )

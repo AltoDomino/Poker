@@ -6,7 +6,6 @@ export interface ICards {
    export interface IPlayer {
     name: string;
     hand: ICards;
-    chips :string[]
   }
    export interface IChip {
     denomination: number;
@@ -19,24 +18,27 @@ export interface ICards {
     playerId: string;
   }
   
-  export interface IPokerStore extends IGameState {
-    revealedCard: number,
-    gameTime: string,
-    startPlayerTime: boolean,
-    stopPlayerTime:boolean,
-    cardsOnTable: number,
-    cardOnHand: number,
+  export interface IPokerStore  {
+    communityCards:[]
+    computerTime: boolean
+    playerCards?:ICards[]
+    computerCards?:ICards[]
+    playerTime: boolean,
+    computerTime:boolean,
+    cardsOnTable: number
+    wonDeck : boolean
     setPot: (amount: number) => void;
-    resetGame: () => void;
+    resetCards:() => void;
     setCurrentBet: (amount: number) => void;
-    setCurrentPlayer: (playerId: string) => void;
-    setRound: (round: IGameState['round']) => void;
-    addCommunityCard: (card: ICard) => void;
+    changePlayer: () => void;
+    changeComputer: () => void;
+    addCommunityCard: (card: ICards) => void;
     resetGame: () => void
+    changeTime:(second:number)=> void, 
+    setPlayerCards: (cards: ICards[]) => void,
+    setComputerCards:(cards: ICards[]) => void,
   }
   
- 
-
   export interface IChipStore {
     totalChips: IChip[];
     playerChips: IPlayerChips[];
@@ -45,12 +47,16 @@ export interface ICards {
     addChipsToGame: (chips: IChip[]) => void;
     resetChips: () => void;
   }
-  export interface initialState{
-    revealedCard: number,
-    gameTime: string,
-    startPlayerTime: boolean,
-    stopPlayerTime:boolean,
+  export interface InitialState{
+    playerTime: boolean,
+    computerTime:boolean,
     cardsOnTable: number
-    cardOnHand: number
     wonDeck : boolean
+    playerCards?:ICards[]
+    computerCards?:ICards[]
+    communityCards:[]
+  }
+  export interface ResultCoin {
+    playerValue:number
+    fullBet:number
   }

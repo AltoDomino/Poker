@@ -1,14 +1,38 @@
 .GamePageContainer{
-    background-image: url("images.jpeg");
+    background-image: url(images.jpeg);
     background-size: cover;
-    height: 300px;
-    width: 500px;
+    height: 356px;
+    width: 558px;
+    margin-left: 152px;
 }
-.Player >img{
+.Player{
+    display: flex;
+    flex-direction: column
+}
+.Computer{
+    display: flex;
+    flex-direction: row;
+    margin-top: -134px;
+}
+.cards{
+    display: flex;
+    flex-direction: row;
+}
+.coins{
+    width: 720px;
+}
+.cards >img{
     height: 170px;
     width: 100px;
 }
 .Computer >img{
     height: 170px;
     width: 100px;
+}
+.space{
+    display: flex;
+    justify-content: space-between;
+    gap:200px;
+    flex-direction: column;
+
 }

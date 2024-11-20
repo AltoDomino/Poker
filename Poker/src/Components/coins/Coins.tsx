@@ -42,6 +42,7 @@ export const Coins = () => {
   addCoins(100, "black_100.png");
 
   return {
+    coins,
     white,
     red,
     blue,

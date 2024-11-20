@@ -1,26 +1,35 @@
-import React from "react";
 import styles from "./StartPage.module.scss";
 import { Buttons } from "../../Components/buttons/buttons";
 import { useNavigate } from "react-router-dom";
-import { Combos } from "../../Components/combos/Combos";
-import { StartCards } from "../../utiils/StartCards";
-import { IPokerStore } from "../../stateTypes";
 import { useStats } from "../../store/useMemmoryStore";
+import { ICards, InitialState, IPokerStore } from "../../stateTypes";
 import { getRandomCard } from "../../Components/gameCards/getRandomCard/getRandomCard";
-import { Coins } from "../../Components/coins/Coins";
-import { Rounds } from "../../Components/rounds/rounds";
+import { useEffect } from "react";
 
 export const StartPage = () => {
+  const { wonDeck, setPlayerCards, setComputerCards }: IPokerStore =
+    useStats() as IPokerStore;
   const navigate = useNavigate();
-const twoCards = getRandomCard()
-  const keys = Rounds();
-    console.log(twoCards)
+
+  const {
+    PlayerFirstCard,
+    PlayerSecondCard,
+    ComputerFirstCard,
+    ComputerSecondCard,
+  } = getRandomCard();
+
+  useEffect(() => {
+    if (wonDeck) {
+      setPlayerCards([PlayerFirstCard, PlayerSecondCard]);
+      setComputerCards([ComputerFirstCard, ComputerSecondCard]);
+    }
+  }, [wonDeck, setPlayerCards, setComputerCards]);
 
   const handleChange = () => {
-    navigate("/play");
+    if(wonDeck){
+       navigate("/play");
+    }
   };
-
-  // const {changeStart} :IPokerStore = useStats()
 
   return (
     <div className={styles.StartPageContainer}>
