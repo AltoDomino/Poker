@@ -46,7 +46,7 @@ export const GamePage = () => {
                 <img src={ComputerFirstCard.rank} />
                 <img src={ComputerSecondCard.rank} />
               </div>
-             <CoinsCounter></CoinsCounter>
+             <CoinsCounter ></CoinsCounter>
               <div className={styles.Player}>
                 <h2>{playerOne.name}</h2>
                 <div className={styles.cards}>

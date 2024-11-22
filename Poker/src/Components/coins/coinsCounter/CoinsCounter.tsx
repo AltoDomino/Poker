@@ -1,16 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { Coins } from "../Coins";
-import { Timer } from "../../../timer/Timer";
-import { ComprareCards } from "../../turn/ComprareCards";
-import { InitialState, IPokerStore, ResultCoin } from "../../../stateTypes";
+import { InitialState, IPokerStore } from "../../../stateTypes";
 import { useStats } from "../../../store/useMemmoryStore";
+import { useStore } from "zustand";
 
-export const CoinsCounter = () => {
+
+export const CoinsCounter: React.FC = () => {
   const [playerValue, setPlayerValue] = useState(0);
   const [fullBet, setFullBet] = useState(0);
-  const { playerTime, computerTime, changeComputer }: IPokerStore =
-    useStats() as IPokerStore;
+  const [computerValue, setComputerValue] = useState(0);
+  const [inputValue, setInputValue] = useState(0);
+  const {
+    gameOver,
+     playerTime,
+     wonDeck, 
+     playerCards,
+     computerCards,
+     changePlayer,
+     resetGame,
+     changeComputer}: IPokerStore = useStats() as IPokerStore;
 
+  useEffect(() => {
+    if (!gameOver) {
+      if (playerCards!.length === 0 && computerCards!.length === 0) {
+        resetGame();
+      } else {
+        if (playerTime) {
+        let Interval = 0
+         setInterval(() => {
+          Interval++
+         }, 1000);
+         if(Interval===10){
+          changePlayer();
+         }
+        }
+      }
+    }
+  }, [playerTime]);
   const { white, red, blue, green, dark, coins } = Coins();
   const coinsColors = [white[1], red[1], blue[1], green[1], dark[1]];
   const allcoins = [...coins];
@@ -30,55 +56,54 @@ export const CoinsCounter = () => {
 
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
-    setPlayerValue(newValue);
+    setInputValue(newValue);
   };
-
   const handleCoinClick = (index: number) => {
-    if (!index) {
-      if (playerTime) {
-        setPlayerValue(index);
-      }
-    } else {
+    if (playerTime) {
       setPlayerValue(playerValue + index);
     }
   };
-  const HandleCheck = () => {
-    if (playerValue === 0 || playerValue !== 0) {
-      if (playerTime) {
-        setFullBet(playerValue);
-      }
+  const playerAction = (action:string) => {
+    if (wonDeck) return
+    if (action === 'raise') {
+      setPlayerValue(inputValue)
+
+    } else if (action === 'fold') {
+      changeComputer()
     }
   };
-  const HandleRaiseBet = () => {
-    if (playerValue !== 0) {
-      if (playerTime) {
-        setFullBet(playerValue);
-      }
-    } else {
-      alert("RAISE YOUR BET");
+
+  const computerAction = () => {
+    if(!playerTime){
+      const randomAction = Math.random() > 0.5 ? 'raise' : 'fold';
+    if (randomAction === 'raise') {
+      setComputerValue(20)
+          } else {
+    changeComputer()
     }
+    }
+  
   };
-  const HandlePass = () => {
-    changeComputer();
-  };
+  computerAction()
 
   return (
     <div>
       <input
         type="range"
         max="500"
-        value={playerValue}
         onChange={handleInputValue}
       />
-      <output>{playerValue} postawione</output>
-      <div>{} Computer value</div>
-      <div>{fullBet} fullbet</div>
-      <button onClick={HandlePass}>PASS</button>
-      <button onClick={HandleCheck}>CHECK</button>
-      <button onClick={HandleRaiseBet}>RAISE YOUR BET</button>
+      <Timer
+        playerValue={playerValue}
+        computerValue={computerValue}
+        fullBet={fullBet}
+        inputValue={inputValue}
+      />
+        <button onClick={() => playerAction('raise')}>Przebicie</button>
+        <button onClick={() => playerAction('fold')}>Spasowanie</button>
       {coinsColors.map((coin, index) => (
         <button key={index} onClick={() => handleCoinClick(newCoins[index])}>
-          <img src={coin} />
+          <img src={coin} alt={`coin-${index}`} />
         </button>
       ))}
     </div>

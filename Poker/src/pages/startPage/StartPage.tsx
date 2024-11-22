@@ -7,7 +7,7 @@ import { getRandomCard } from "../../Components/gameCards/getRandomCard/getRando
 import { useEffect } from "react";
 
 export const StartPage = () => {
-  const { wonDeck, setPlayerCards, setComputerCards }: IPokerStore =
+  const { wonDeck, setPlayerCards, setComputerCards}: IPokerStore =
     useStats() as IPokerStore;
   const navigate = useNavigate();
 
@@ -20,13 +20,13 @@ export const StartPage = () => {
 
   useEffect(() => {
     if (wonDeck) {
-      setPlayerCards([PlayerFirstCard, PlayerSecondCard]);
+      setPlayerCards([PlayerFirstCard, PlayerSecondCard])
       setComputerCards([ComputerFirstCard, ComputerSecondCard]);
     }
   }, [wonDeck, setPlayerCards, setComputerCards]);
 
   const handleChange = () => {
-    if(wonDeck){
+    if(wonDeck ){  
        navigate("/play");
     }
   };

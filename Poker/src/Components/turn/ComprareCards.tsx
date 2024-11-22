@@ -6,39 +6,33 @@ import { CoinsCounter } from "../coins/coinsCounter/CoinsCounter";
 import { ResultCoin } from "../../stateTypes";
 
 export const ComprareCards = () =>{
+   const cardTable:ICards[]  = []
 
+    const {
+    time,
+    startPlayerTime,
+    cardsOnTable,
+    wonDeck,
+    resetGame,
+    setCurrentBet,
+    changePlayer,
+    addCommunityCard,
+    changeTime
+  }:IPokerStore
+  =useStats() as IPokerStore
 
-  //   const {
-  //   time,
-  //   startPlayerTime,
-  //   cardsOnTable,
-  //   wonDeck,
-  //   resetGame,
-  //   setCurrentBet,
-  //   changePlayer,
-  //   addCommunityCard,
-  //   changeTime
-  // }:IPokerStore
-  // =useStats() as IPokerStore
-
-  //   const {
-  //   tableCardOne,
-  //   tableCardTwo,
-  //   tableCardThree,
-  //   tableCardFour,
-  //   tableCardFive,
-  // } = getRandomCard();
-
-
-
-    const cardTable:ICards[]  = []
+    const {
+    tableCardOne,
+    tableCardTwo,
+    tableCardThree,
+    tableCardFour,
+    tableCardFive,
+  } = getRandomCard();
 
 
 
+ 
 
-  const round =() =>{
-    
-  }
 
   return (
     <div>

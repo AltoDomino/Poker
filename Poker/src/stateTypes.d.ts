@@ -24,9 +24,9 @@ export interface ICards {
     playerCards?:ICards[]
     computerCards?:ICards[]
     playerTime: boolean,
-    computerTime:boolean,
-    cardsOnTable: number
-    wonDeck : boolean
+    cardsOnTable: ICards[]
+    wonDeck : boolean,
+    gameOver:boolean
     setPot: (amount: number) => void;
     resetCards:() => void;
     setCurrentBet: (amount: number) => void;
@@ -49,9 +49,9 @@ export interface ICards {
   }
   export interface InitialState{
     playerTime: boolean,
-    computerTime:boolean,
-    cardsOnTable: number
-    wonDeck : boolean
+    cardsOnTable: ICards[]
+    wonDeck : boolean,
+    gameOver: false,
     playerCards?:ICards[]
     computerCards?:ICards[]
     communityCards:[]
@@ -59,4 +59,9 @@ export interface ICards {
   export interface ResultCoin {
     playerValue:number
     fullBet:number
+    inputValue:number,
+    computerValue:number
+    buttonCheck :(number)=> number | undefined
+    buttonRaisebet: (number) => number
+    buttonPass: ()=> void
   }
