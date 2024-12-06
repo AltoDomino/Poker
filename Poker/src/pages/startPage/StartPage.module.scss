@@ -1,6 +1,7 @@
 .StartPageContainer{
-    background-image: url("StartGame.jpeg");
-
-    height: 400px;
-    width: 400px;
+    background-image: url(StartGame.jpg);
+    height: 100vh;
+    background-size: cover;
+    width: 100vw;
+    background-color: black;
 }

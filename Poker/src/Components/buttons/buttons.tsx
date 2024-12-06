@@ -9,7 +9,7 @@ import styles from "./buttons.module.scss";
 export const Buttons = ({children , onClick}: Iprops) => {
    
   return (
-    <div>
+    <div className={styles.everyButton} >
         <button className={styles.button} 
         onClick={() =>onClick!()}>
         {children}

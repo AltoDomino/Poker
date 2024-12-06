@@ -10,7 +10,7 @@ export interface ICards {
    export interface IChip {
     denomination: number;
     color: string
-    quantity: number;
+    quantity?: number;
   }
   export interface IAction {
     type: 'bet' | 'check' | 'fold' | 'raise';
@@ -19,49 +19,39 @@ export interface ICards {
   }
   
   export interface IPokerStore  {
-    communityCards:[]
+    communityCards:ICards[]
     computerTime: boolean
     playerCards?:ICards[]
     computerCards?:ICards[]
     playerTime: boolean,
-    cardsOnTable: ICards[]
+    cardsOnTable: boolean
     wonDeck : boolean,
-    gameOver:boolean
-    setPot: (amount: number) => void;
+    playerValue:number,
+    computerValue:number,
+    fullBet:number,
     resetCards:() => void;
-    setCurrentBet: (amount: number) => void;
+    showFirstCards: () =>void;
     changePlayer: () => void;
-    changeComputer: () => void;
     addCommunityCard: (card: ICards) => void;
     resetGame: () => void
     changeTime:(second:number)=> void, 
     setPlayerCards: (cards: ICards[]) => void,
     setComputerCards:(cards: ICards[]) => void,
+    showAllCards:(cards:ICards[]) => void
   }
   
-  export interface IChipStore {
-    totalChips: IChip[];
-    playerChips: IPlayerChips[];
-    addChipsToPlayer: (playerId: string, chips: IChip[]) => void;
-    removeChipsFromPlayer: (playerId: string, chips: IChip[]) => void;
-    addChipsToGame: (chips: IChip[]) => void;
-    resetChips: () => void;
-  }
+
   export interface InitialState{
+    communityCards: ICards[],
     playerTime: boolean,
-    cardsOnTable: ICards[]
+    cardsOnTable: boolean,
     wonDeck : boolean,
-    gameOver: false,
     playerCards?:ICards[]
     computerCards?:ICards[]
-    communityCards:[]
+    playerValue:number
+    computerValue:number
+    fullBet:number
   }
   export interface ResultCoin {
-    playerValue:number
     fullBet:number
-    inputValue:number,
-    computerValue:number
-    buttonCheck :(number)=> number | undefined
-    buttonRaisebet: (number) => number
-    buttonPass: ()=> void
   }

@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from 'react'
 import { useState } from 'react'
+import styles from "./playerName.module.scss";
 
 interface PlayerNameProps {
      onNameSubmit: (name: string) => void; 
@@ -19,12 +20,18 @@ export const PlayerName:React.FC<PlayerNameProps> = ({onNameSubmit}) => {
 
 
   return (
-  <form onSubmit={handleSubmit}>
-    <label>
+  <form onSubmit={handleSubmit} className={styles.form}>
+    <label className={styles.label}>
         Player Name:
-        <input value={namePlayer} onChange={handleInputChange}/>
+        <input 
+        className={styles.input}
+        value={namePlayer} 
+        onChange={handleInputChange}/>
     </label>
-        <button type="submit">ZATWIERDŹ</button>
+        <button 
+        className={styles.confirm}
+        type="submit">ZATWIERDŹ
+        </button>
   </form>
   )
 }

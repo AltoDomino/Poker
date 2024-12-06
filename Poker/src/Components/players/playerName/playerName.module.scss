@@ -1,0 +1,71 @@
+body {
+  background-color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0; /* Usunięcie domyślnego marginesu */
+  overflow: hidden; /* Aby uniknąć przesuwania strony */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  background-color: #643434;
+  padding: 40px; /* Zwiększony padding dla lepszej widoczności */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  align-items: center;
+  max-width: 600px; /* Ustawienie maksymalnej szerokości formularza */
+  width: 100%; /* Formularz zajmuje 100% dostępnej szerokości, aż do 600px */
+  box-sizing: border-box;
+}
+
+label {
+  color: #fff; 
+  font-size: 60px; /* Zwiększony rozmiar czcionki */
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 15px; /* Zwiększony margines dolny */
+}
+
+input {
+  width: 100%;
+  padding: 12px; /* Zwiększony padding dla lepszej widoczności */
+  font-size: 100px; /* Zwiększony rozmiar czcionki */
+  border: 1px solid #444;
+  border-radius: 5px;
+  background-color: #1b1b1b; /* Ciemne pole tekstowe */
+  color: #fff;
+  margin-top: 5px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #000000; /* Zielona ramka przy aktywnym polu */
+  box-shadow: 0 0 5px #4caf50; 
+}
+
+button {
+  margin-top: 20px; /* Zwiększony margines górny */
+  padding: 12px 24px; /* Zwiększony padding */
+  font-size: 30px; /* Zwiększony rozmiar czcionki */
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+  background-color: #040704; /* Zielony przycisk */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #050a05; /* Ciemniejszy zielony przycisk po najechaniu */
+  transform: scale(1.05); /* Lekko powiększa przycisk */
+}
+
+button:active {
+  background-color: #000000; /* Jeszcze ciemniejszy przycisk po kliknięciu */
+}
+.confirm{
+  font-size: 50px;
+}

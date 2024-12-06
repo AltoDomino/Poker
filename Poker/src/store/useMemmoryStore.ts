@@ -5,33 +5,34 @@ import { devtools } from 'zustand/middleware'
 export const useStore :InitialState = {
     playerCards: [],
     computerCards: [],
-    gameOver: false,
-    wonDeck: true,
+    playerValue:0,
+    computerValue:0,
+    fullBet:0,
+    communityCards: [],
+    wonDeck: false,
     playerTime: true,
-    cardsOnTable: [],
-    communityCards: []
+    cardsOnTable: false,
 }
 
 export const useStats = create(
     devtools((set) =>{
         return{
-            communityCards:useStore.communityCards,
             playerTime: useStore.playerTime,
             cardsOnTable: useStore.cardsOnTable,
             wonDeck: useStore.wonDeck,
+            communityCards:useStore.communityCards,
             computerCards: useStore.computerCards,
             playerCards: useStore.playerCards,
             resetGame: () => set(useStore),
-            resetCards:() => set({wonDeck:false}),
-            changePlayer:() => set({playerTime: false,computerTime:true}),
-            changeComputer:() => set({playerTime: true,computerTime: false}),
-            changeTime:(time:number) => set(()=>(time)),
-            addCommunityCard: (card: ICards) => set({cardsTable:card}),
-            setCurrentBet: (amount: number) =>amount,
+            resetCards:() => set({wonDeck:true}),
+            showFirstCards: () => set((state: { cardsOnTable:boolean }) => ({ cardsOnTable: !state.cardsOnTable })),
+            changePlayer: () => set((state: { playerTime:boolean }) => ({ playerTime: !state.playerTime })),
+            addCommunityCard: (cards: ICards[]) => set(
+                {communityCards:cards}),
             setPlayerCards: (cards: ICards[]) => set(
-                { playerCard: cards }),
+                { playerCards: cards }),
             setComputerCards: (cards: ICards[]) => set(
-                { computerCards: cards})
+                { computerCard: cards}),
         }
     })
 )

@@ -1,0 +1,10 @@
+.cardsTable{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.cardsTable >img{
+    height: 123px;
+    width: 73px;
+    margin: 0px;
+}

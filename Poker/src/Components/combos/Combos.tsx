@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Combos.module.scss";
-import { ICards } from "../../stateTypes";
+import { ICards, IPokerStore} from "../../stateTypes";
 import { getRandomCard } from "../gameCards/getRandomCard/getRandomCard";
-
+import { useStats } from "../../store/useMemmoryStore";
 export const Combos = () => {
-  const [info, setInfo]= useState("")
+  const [infoPlayer, setInfoPlayer]= useState("")
+  const [infoComputer, setInfoComputer]= useState("")
+  const [result,setResult] = useState("")
+  const {wonDeck,resetCards}: IPokerStore = 
+  useStats() as IPokerStore;
     const {
         tableCardOne,
         tableCardTwo,
@@ -13,28 +17,46 @@ export const Combos = () => {
         tableCardFive,
         PlayerFirstCard,
         PlayerSecondCard,
+        ComputerFirstCard,
+        ComputerSecondCard
       } = getRandomCard();
-      const tableCards = [
-        tableCardOne,
-        tableCardTwo,
-        tableCardThree,
-        tableCardFour,
-        tableCardFive,
-      ];
-      const checkForMatches = (
+
+    const tableCard = [     
+      tableCardOne,
+      tableCardTwo,
+      tableCardThree,
+      tableCardFour,
+      tableCardFive,
+    ]
+  
+    useEffect(()=>{
+      if(!wonDeck){
+           const checkForMatches = (
         tableCards: ICards[],
         firstP: ICards,
-        secondP: ICards
+        secondP: ICards,
+        FirstC:ICards,
+        SecondC:ICards
       ): void => {
-        const allCards = [...tableCards, firstP, secondP];
-        const cardNumbers = allCards.map((card) => card.number);
-        const cardSymbols = allCards.map((card) => card.symbol);
-    
+        const allCardsPlayer = [...tableCards, firstP, secondP];
+        const cardNumbersPlayer = allCardsPlayer.map((card) => card.number);
+        const cardSymbolsPlayer = allCardsPlayer.map((card) => card.symbol);
+
+        const allCardsComputer = [...tableCards, FirstC, SecondC];
+        const cardNumbersComputer = allCardsComputer.map((card) => card.number);
+        const cardSymbolsComputer = allCardsComputer.map((card) => card.symbol);
+   
         const hasSameNumber = (count: number) =>
-          cardNumbers.filter((num, index, arr) => arr.filter((x) => x === num).length === count).length >= count;
+          cardNumbersPlayer.filter((num, index, arr) => arr.filter((x) => x === num).length === count).length >= count;
           
         const hasSameSymbol = (count: number) =>
-          cardSymbols.filter((symbol, index, arr) => arr.filter((x) => x === symbol).length === count).length >= count;
+          cardSymbolsPlayer.filter((symbol, index, arr) => arr.filter((x) => x === symbol).length === count).length >= count;
+
+        const hasSameNumberC = (count: number) =>
+          cardNumbersComputer.filter((num, index, arr) => arr.filter((x) => x === num).length === count).length >= count;
+          
+        const hasSameSymbolC = (count: number) =>
+          cardSymbolsComputer.filter((symbol, index, arr) => arr.filter((x) => x === symbol).length === count).length >= count;
     
         const isStraight = (numbers: number[]) =>numbers
         .sort((a, b) => a - b)
@@ -42,23 +64,62 @@ export const Combos = () => {
     
         
         if (hasSameNumber(4)) {
-          setInfo("FOUR OF A KIND");
+          setInfoPlayer("FOUR OF A KIND")
         } else if (hasSameNumber(3) && hasSameNumber(2)) {
-          setInfo("FULL HOUSE");
+          setInfoPlayer("FULL HOUSE");
         } else if (hasSameSymbol(5)) {
-          setInfo("FLUSH");
-        } else if (isStraight(cardNumbers)) {
-          setInfo("STRAIGHT");
+          setInfoPlayer("FLUSH");
+        } else if (isStraight(cardNumbersPlayer)) {
+          setInfoPlayer("STRAIGHT");
         } else if (hasSameNumber(3)) {
-          setInfo("THREE OF A KIND");
+          setInfoPlayer("THREE OF A KIND");
         } else if (hasSameNumber(2) && hasSameNumber(2)) {
-          setInfo("TWO PAIR");
+          setInfoPlayer("TWO PAIR");
         } else if (hasSameNumber(2)) {
-          setInfo("ONE PAIR");
+          setInfoPlayer("ONE PAIR");
         } else {
-          setInfo("HIGH CARD");
+          setInfoPlayer("HIGH CARD");
+        }
+
+        if (hasSameNumberC(4)) {
+          setInfoComputer("FOUR OF A KIND")
+        } else if (hasSameNumberC(3) && hasSameNumberC(2)) {
+          setInfoComputer("FULL HOUSE");
+        } else if (hasSameSymbolC(5)) {
+          setInfoComputer("FLUSH");
+        } else if (isStraight(cardNumbersComputer)) {
+          setInfoComputer("STRAIGHT");
+        } else if (hasSameNumberC(3)) {
+          setInfoComputer("THREE OF A KIND");
+        } else if (hasSameNumberC(2) && hasSameNumberC(2)) {
+          setInfoComputer("TWO PAIR");
+        } else if (hasSameNumberC(2)) {
+          setInfoComputer("ONE PAIR");
+        } else {
+          setInfoComputer("HIGH CARD");
         }
       };
-      checkForMatches(tableCards, PlayerFirstCard, PlayerSecondCard);
-      return <div>{info}</div>
+
+      checkForMatches(tableCard, PlayerFirstCard, PlayerSecondCard,ComputerFirstCard,ComputerSecondCard);
+      }
+  
+      const combosNames:string[] = ["HIGH CARD","ONE PAIR","TWO PAIR","THREE OF A KIND","STRAIGHT","FLUSH","FULL HOUSE","FOUR OF A KIND"]
+     for(let i = 0 ; i <combosNames.length;i++){
+      const infoP = infoPlayer[i]
+      const infoC = infoComputer[i]
+      if(wonDeck){
+        infoP < infoC ? setResult("YOU LOSE") : setResult(`YOU WON WITH ${infoPlayer}`)
+      }
+     }
+
+     console.log("wondDeck combo",wonDeck)
+     console.log(wonDeck,infoPlayer,infoComputer)
+    },[infoPlayer,infoComputer])
+
+      return (
+        <div>
+          <div className={styles.result}>{result} </div>
+        </div>
+   
+    )
 };

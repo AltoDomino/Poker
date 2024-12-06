@@ -4,7 +4,6 @@ import { GamePage } from "./pages/gamePage/GamePage";
 import { ResultPage } from "./pages/resultPage/ResultPage";
 
  const App = () => ( 
-
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<StartPage />} />
