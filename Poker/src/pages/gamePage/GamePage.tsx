@@ -4,11 +4,11 @@ import styles from "./GamePage.module.scss";
 import { PlayerName } from "../../Components/players/playerName/playerName";
 import { useNavigate } from "react-router-dom";
 import { CoinsCounter } from "../../Components/coins/coinsCounter/CoinsCounter";
-import { Combos } from "../../Components/combos/Combos";
+import { IPokerStore } from "../../stateTypes";
+import { useStats } from "../../store/useMemmoryStore";
 
 export const GamePage = () => {
   const navigate = useNavigate();
-
   const [playerName, setNamePlayer] = useState("");
 
   const {

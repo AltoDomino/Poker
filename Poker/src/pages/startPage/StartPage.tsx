@@ -28,9 +28,8 @@ export const StartPage = () => {
   }, [wonDeck, setPlayerCards, setComputerCards, PlayerFirstCard, PlayerSecondCard, ComputerFirstCard, ComputerSecondCard]);
 
   const handleChange = () => {
-    if (!wonDeck) {
       navigate("/play");
-    }
+    
   };
 
   return (
