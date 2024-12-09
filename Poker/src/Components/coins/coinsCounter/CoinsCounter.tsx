@@ -23,10 +23,8 @@ export const CoinsCounter = () => {
  
   const {
     playerTime,
-    wonDeck,
     changePlayer,
     showFirstCards,
-    resetGame,
   }: IPokerStore = useStats() as IPokerStore;
 
   const values = [1, 5, 10, 25, 100];
@@ -61,25 +59,22 @@ export const CoinsCounter = () => {
 
   const computerBet = (randomValue: number) => {
     setComputerValue((prev) => prev + randomValue);
-  console.log(computerValue)
     if (randomValue < playerValue && playerValue !== 6410) {
       alert("Computer Check");
       setComputerValue(playerValue);
       setFullBet(playerValue + playerValue);
-      updateComputerBank(playerValue); // Odejmowanie wartości od computerBank
+      updateComputerBank(playerValue); 
       console.log(computerValue, playerValue);
       showFirstCards();
     } else if (playerValue === 0) {
-      console.log(computerValue);
       setComputerValue(randomValue);
       if (computerValue === 0 && playerValue === 0) {
         setFullBet(playerValue + playerValue);
       }
     } else if (randomValue > playerValue) {
       alert("Computer raise the bet!");
-      console.log(computerValue, playerValue);
       setComputerValue(computerValue + randomValue + playerValue);
-      updateComputerBank(randomValue + playerValue); // Aktualizacja banku komputera
+      updateComputerBank(randomValue + playerValue);
     } else if (randomValue < playerValue && playerValue === 6410) {
       alert("ALL IN");
       setFullBet(12820);
@@ -91,8 +86,7 @@ export const CoinsCounter = () => {
       alert("Computer Check");
       setComputerValue(playerValue);
       setFullBet(computerValue + playerValue);
-      updateComputerBank(playerValue); // Aktualizacja dla równych wartości
-      console.log(computerValue);
+      updateComputerBank(playerValue);
       showFirstCards();
     }else if(computerValue === 0 ){
     setComputerBank(randomValue)
@@ -109,24 +103,24 @@ export const CoinsCounter = () => {
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
     if (newValue < computerValue) {
-      alert(`Minimalna wartość zakładu to ${computerValue}`);
+      alert(`MIN BET IS ${computerValue}`);
       setInputValue(computerValue); 
     } else if (newValue <= playerBank) {
       setInputValue(newValue);
     } else {
-      alert("Nie masz wystarczających środków w banku!");
+      alert("NOT ENOUGH COINS!");
     }
   };
 
   const handleCoinClick = (value: number) => {
     const newValue = inputValue + value;
     if (newValue < computerValue) {
-      alert(`Minimalna wartość zakładu to ${computerValue}`);
+      alert(`MIN BET IS ${computerValue}`);
     } else if (newValue <= playerBank) {
       setInputValue(newValue);
       setPlayerBank((prev) => prev - value);
     } else {
-      alert("Nie masz wystarczających środków w banku!");
+      alert("NOT ENOUGH COINS!");
     }
   };
 

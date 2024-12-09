@@ -30,7 +30,7 @@ export const PlayerName:React.FC<PlayerNameProps> = ({onNameSubmit}) => {
     </label>
         <button 
         className={styles.confirm}
-        type="submit">ZATWIERDŹ
+        type="submit">SUBMIT
         </button>
   </form>
   )

@@ -43,7 +43,7 @@ export const TableCards = ({ fullBet }: ResultCoin) => {
           resetCards()
         }
     }
-  }, [cardsOnTable, storeCards.length, resetGame,resetCards]);
+  }, [cardsOnTable, storeCards.length, resetGame,resetCards])
 
   return (
     <div className={styles.cardsTable}>
