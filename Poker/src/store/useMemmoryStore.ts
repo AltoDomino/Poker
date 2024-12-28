@@ -27,6 +27,7 @@ export const useStats = create(
             resetCards:() => set({wonDeck:true}),
             showFirstCards: () => set((state: { cardsOnTable:boolean }) => ({ cardsOnTable: !state.cardsOnTable })),
             changePlayer: () => set((state: { playerTime:boolean }) => ({ playerTime: !state.playerTime })),
+            setComputerValue: (computerValueRef:number) => set({ value: computerValueRef}),
             addCommunityCard: (cards: ICards[]) => set(
                 {communityCards:cards}),
             setPlayerCards: (cards: ICards[]) => set(

@@ -1,58 +1,64 @@
 
+  body{
+ background-color: #1b1b1b; 
+ height: 100vh;
+ width: 100vw;
+}
   
   .GamePageContainer {
-    align-items: center;
-    background-color: #1b1b1b; /* Kontrastujące tło dla głównej sekcji gry */
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    background-image: url("images.jpeg");
+     background-size: cover;
+      width: 90%; 
+     max-width: 600px;
+       max-height: 450px; 
+     display: flex; 
+     justify-content: center; 
+     align-items: center; 
+     border-radius: 15px;
+     flex-direction: column;
   }
 
-  
-  .space {
+  .Computer{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .Computer, 
-  .Player {
-    background-color: #3a3a3a; /* Oddzielne obszary graczy */
-    padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
     color: #fff;
+    flex-direction: row;
   }
-  
+    .Player {
+  display: flex;
+  flex-direction: row;
+
+    }
+  .playerCards{
+    display: flex;
+    align-items: end;
+  }
   .Computer h2,
   .Player h2 {
     font-family: 'Courier New', Courier, monospace;
     font-size: 24px;
     margin-bottom: 10px;
-    color: #f4b400; /* Złoty kolor nagłówków */
+    color: #f4b400; 
   }
   
   .cards {
     display: flex;
-    justify-content: center;
     gap: 10px;
+    margin: 0;
   }
   
   img {
     width: 80px;
-    height: auto;
+    height: 120px;
     border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   }
   
   button {
     margin-top: 15px;
     padding: 10px 20px;
     font-size: 18px;
-    color: #fff;
-    background-color: #4caf50;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -72,11 +78,31 @@
     color: #fff;
     font-size: 20px;
     font-family: 'Arial', sans-serif;
-    background-color: #212121;
     padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+   
   }
-  .back{
-    font-size: 60px;
+
+
+  @media screen and (min-width: 450px) {
+    .GamePageContainer {
+      width:  100%; 
+      max-width: 900px; 
+      height: 600px;
+    }
+
+  }
+  @media screen and (min-width: 750px) {
+    .GamePageContainer {
+      width:  100%; 
+      max-width: 800px; 
+      height: 500px;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .GamePageContainer {
+      width:  100%; 
+      max-width: 700px; 
+      height: 400px;
+    }
   }

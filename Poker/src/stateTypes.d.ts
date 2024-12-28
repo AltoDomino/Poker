@@ -29,6 +29,7 @@ export interface ICards {
     playerValue:number,
     computerValue:number,
     fullBet:number,
+    setComputerValue:(computerValueRef:number) => void
     resetCards:() => void;
     showFirstCards: () =>void;
     changePlayer: () => void;

@@ -1,15 +1,14 @@
 import { getRandomCard } from "../../Components/gameCards/getRandomCard/getRandomCard";
 import { useState } from "react";
 import styles from "./GamePage.module.scss";
-import { PlayerName } from "../../Components/players/playerName/playerName";
-import { useNavigate } from "react-router-dom";
+import { PlayerName } from "../playerName/Login";
 import { CoinsCounter } from "../../Components/coins/coinsCounter/CoinsCounter";
 import { IPokerStore } from "../../stateTypes";
 import { useStats } from "../../store/useMemmoryStore";
 
 export const GamePage = () => {
-  const navigate = useNavigate();
   const [playerName, setNamePlayer] = useState("");
+  const { wonDeck }: IPokerStore = useStats() as IPokerStore;
 
   const {
     PlayerFirstCard,
@@ -22,10 +21,6 @@ export const GamePage = () => {
     setNamePlayer(name);
   };
 
-  const handleBack = () => {
-    navigate("/");
-  };
-
   return (
     <div>
       <div className={styles.GamePageSetName}>
@@ -33,23 +28,31 @@ export const GamePage = () => {
           <PlayerName onNameSubmit={handleNameSubmit}></PlayerName>
         ) : (
           <div className={styles.GamePageContainer}>
-            <div className={styles.space}>
-              <div className={styles.Computer}>
-                <h2>Computer</h2>
-                <img src={ComputerFirstCard.rank} />
-                <img src={ComputerSecondCard.rank} />
+            <div className={styles.Computer}>
+              <h2>Computer</h2>
+              <div>
+                {!wonDeck ? (
+                  <>
+                    <img src="./karta.png" />
+                    <img src="./karta.png" />
+                  </>
+                ) : (
+                  <>
+                    <img src={ComputerFirstCard.rank} />
+                    <img src={ComputerSecondCard.rank} />
+                  </>
+                )}
               </div>
-              <CoinsCounter />
-              <div className={styles.Player}>
-                <h2>{playerName}</h2>
-                <div className={styles.cards}>
+            </div>
+            <div className={styles.Player}>
+              <div className={styles.cards}>
+                <div className={styles.playerCards}>
+                  <h2>{playerName}</h2>
                   <img src={PlayerFirstCard.rank} />
                   <img src={PlayerSecondCard.rank} />
                 </div>
+                <CoinsCounter />
               </div>
-              <button className={styles.back} onClick={handleBack}>
-                POWRÓT DO MENU
-              </button>
             </div>
           </div>
         )}
